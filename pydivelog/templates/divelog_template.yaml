@@ -1,0 +1,382 @@
+docoptions:
+  format: A5
+  title: Divelog
+  fonts:
+    sathu:
+      fname: /Library/Fonts/Sathu.ttf
+      uni: True
+
+defaults:
+  font: sathu
+  size: 12
+  align: L
+  bold: 0
+  italic: 0
+  underline: 0
+  foreground: 0
+  background: 0xFFFFFF
+  priority: 10
+
+templates:
+  textbox: &textbox
+    w: 20
+    h: 20
+    type: text
+  qrcode: &qrcode
+    w: 15
+    h: 15
+    type: image
+  box: &box
+    border: 0.1
+    bordercolor: 0
+    type: box
+  whiteonblack: &whiteonblack
+    background: 0
+    foreground: 0xFFFFFF
+    fill: 1
+  formbox: &formbox
+    <<: *textbox
+    border: 1
+    bordercolor: 0
+    size: 10
+    align: L
+    text: ' '
+    h: 8
+  lbox: &lbox
+    <<: *formbox
+    x: 10
+    w: 67.5
+  widelbox: &widelbox
+    <<: *formbox
+    x: 10
+    w: 101.25
+  smalllbox: &smalllbox
+    <<: *formbox
+    x: 10
+    w: 33.75
+  llbox: &llbox
+    <<: *formbox
+    x: 10
+    w: 33.75
+  lrbox: &lrbox
+    <<: *formbox
+    x: 43.75
+    w: 33.75
+  rbox: &rbox
+    <<: *formbox
+    x: 77.5
+    w: 67.5
+  widerbox: &widerbox
+    <<: *formbox
+    x: 111.25
+    w: 101.25
+  smallrbox: &smallrbox
+    <<: *formbox
+    x: 111.25
+    w: 33.75
+  rlbox: &rlbox
+    <<: *formbox
+    x: 77.5
+    w: 33.75
+  rrbox: &rrbox
+    <<: *formbox
+    x: 111.25
+    w: 33.75
+
+  1of3box: &1of3box
+    <<: *formbox
+    x: 10
+    w: 45
+  2of3box: &2of3box
+    <<: *formbox
+    x: 55
+    w: 45
+  3of3box: &3of3box
+    <<: *formbox
+    x: 100
+    w: 45
+  w2of3box: &w2of3box
+    w: 90
+  1of6box: &1of6box
+    <<: *formbox
+    x: 10
+    w: 22.5
+  2of6box: &2of6box
+    <<: *formbox
+    x: 32.5
+    w: 22.5
+  3of6box: &3of6box
+    <<: *formbox
+    x: 55.0
+    w: 22.5
+  4of6box: &4of6box
+    <<: *formbox
+    x: 77.5
+    w: 22.5
+  5of6box: &5of6box
+    <<: *formbox
+    x: 100
+    w: 22.5
+  6of6box: &6of6box
+    <<: *formbox
+    x: 122.5
+    w: 22.5
+  1of9box: &1of9box
+    <<: *formbox
+    x: 10
+    w: 15
+  2of9box: &2of9box
+    <<: *formbox
+    x: 25
+    w: 15
+  3of9box: &3of9box
+    <<: *formbox
+    x: 40
+    w: 15
+  4of9box: &4of9box
+    <<: *formbox
+    x: 55
+    w: 15
+  5of9box: &5of9box
+    <<: *formbox
+    x: 70
+    w: 15
+  6of9box: &6of9box
+    <<: *formbox
+    x: 85
+    w: 15
+  7of9box: &7of9box
+    <<: *formbox
+    x: 100
+    w: 15
+  8of9box: &8of9box
+    <<: *formbox
+    x: 115
+    w: 15
+  9of9box: &9of9box
+    <<: *formbox
+    x: 130
+    w: 15
+
+  pictogram: &pictogram
+    type: image
+    offset_x: 0.5
+    offset_y: 1.5
+    border: 0
+    w: 5 
+    h: 5 
+    
+  pictogram_in_box: &pictogram_in_box
+    offset_x: 5
+    border: 0
+  line1: &line1
+    y: 15
+  line2: &line2
+    y: 23
+  line3: &line3
+    y: 31
+  line4: &line4
+    y: 39
+  line5: &line5
+    y: 47
+  line6: &line6
+    y: 55
+
+qrcode_verify:
+  <<: *qrcode
+  x: 129
+  y: 190
+
+qrcode_id:
+  <<: *qrcode
+  x: 135
+  y: 5.15
+  w: 9.85
+  h: 9.80
+  priority: 15
+
+id:
+  <<: *textbox
+  x: 10
+  y: 5.5
+  w: 10
+  h: 10
+  align: C
+  size: 14
+  priority: 15
+  text: ''
+
+title:
+  <<: *textbox
+  <<: *whiteonblack
+  x: 20
+  y: 5.1
+  w: 115
+  h: 9.9
+  align: C
+  text: Divelog
+
+box:
+  <<: *box
+  x: 10
+  y: 5.1
+  w: 135
+  h: 200
+  priority: 1
+
+location:
+  <<: *1of3box
+  <<: *line1
+  <<: *w2of3box
+
+date: &date
+  <<: *3of3box
+  <<: *line1
+  format: "{0:%d.%m.%y %H:%M}"
+  align: R
+
+date_p:
+  <<: *date
+  <<: *pictogram
+  text: "files/date.png"
+
+water:
+  <<: *2of3box
+  <<: *line2
+
+watersname:
+  <<: *1of3box
+  <<: *line2
+
+sight: &sight
+  <<: *5of6box
+  <<: *line3
+  align: R
+  
+sight_p:
+  <<: *sight
+  <<: *pictogram
+  text: "files/eye.png"
+
+divesuit:
+  <<: *lbox
+  <<: *line3
+
+lead: &lead
+  <<: *4of6box
+  <<: *line3
+  align: R
+  
+lead_p:
+  <<: *lead
+  <<: *pictogram
+  text: "files/weight.png"
+
+pressure_start: &pressure_start
+  <<: *formbox
+  <<: *line2
+  <<: *6of6box
+  align: R
+
+pressure_start_p:
+  <<: *pressure_start
+  <<: *pictogram
+  text: 'files/gauge.png'
+
+pressure_end: &pressure_end
+  <<: *formbox
+  <<: *line3
+  <<: *6of6box
+  align: R
+
+pressure_end_p:
+  <<: *pressure_end
+  <<: *pictogram
+  text: 'files/gaugelow.png'
+
+tank: &tank
+  <<: *formbox
+  <<: *line2
+  <<: *5of6box
+  align: R
+
+tank_p:
+  <<: *tank
+  <<: *pictogram
+  text: 'files/tank.png'
+
+duration: &duration
+  <<: *llbox
+  <<: *line4
+  align: R
+
+duration_p:
+  <<: *duration
+  <<: *pictogram
+  text: 'files/time.png'
+
+watertemperature: &watertemperature
+  <<: *6of6box
+  <<: *line4
+  align: R
+
+watertemperature_p:
+  <<: *watertemperature
+  <<: *pictogram
+  text: 'files/tempwater.png'
+  align: R
+
+airtemperature: &airtemperature
+  <<: *5of6box
+  <<: *line4
+  align: R
+
+airtemperature_p:
+  <<: *airtemperature
+  <<: *pictogram
+  text: 'files/temp.png'
+
+maxdepth: &maxdepth
+  <<: *4of6box
+  <<: *line4
+  align: R
+maxdepth_p:
+  <<: *maxdepth
+  <<: *pictogram
+  text: 'files/depth.png'
+
+currentbox:
+  <<: *lrbox
+  <<: *line4
+
+current: &urrent
+  <<: *lrbox
+  <<: *line4
+  <<: *pictogram_in_box
+
+current_p:
+  <<: *urrent
+  <<: *pictogram
+  text: 'files/current.png'
+
+notes:
+  <<: *textbox
+  x: 15
+  <<: *line5
+  offset_y: 5
+  w: 125
+  h: 120
+  align: J
+  size: 12
+  text: ''
+  multiline: True
+
+buddies:
+  <<: *textbox
+  text: ''
+  y: 190
+  x: 15
+  w: 100
+  size: 10
+
+

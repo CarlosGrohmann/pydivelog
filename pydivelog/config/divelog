@@ -1,0 +1,12 @@
+[output]
+baseurl = http://d1v3.de
+type=single
+
+[divelog]
+path = ~/proj/dive/divelog
+
+[tools]
+divecmd = ~/proj/dive/divecmd/divecmd
+
+[divecmd]
+params = -a -d /dev/tty.usbserial-20030001 i450T
