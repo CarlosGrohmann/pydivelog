@@ -1,6 +1,7 @@
 [output]
 baseurl = http://d1v3.de
 type=single
+tempdir=/tmp
 
 [divelog]
 path = ~/proj/dive/divelog

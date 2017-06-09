@@ -1,6 +1,6 @@
 docoptions:
   format: A5
-  title: Divelog
+  title: Divelog Verify
   fonts:
     sathu:
       fname: /Library/Fonts/Sathu.ttf
@@ -184,20 +184,7 @@ templates:
   line6: &line6
     y: 55
 
-qrcode_verify:
-  <<: *qrcode
-  x: 129
-  y: 190
-
-qrcode_id:
-  <<: *qrcode
-  x: 135
-  y: 5.15
-  w: 9.85
-  h: 9.80
-  priority: 15
-
-id:
+id: &id
   <<: *textbox
   x: 10
   y: 5.5
@@ -208,7 +195,7 @@ id:
   priority: 15
   text: ''
 
-title:
+title: &title
   <<: *textbox
   <<: *whiteonblack
   x: 20
@@ -216,23 +203,41 @@ title:
   w: 115
   h: 9.9
   align: C
-  text: Divelog
+  text: Divelog Sign for Matthias Bilger
 
-box:
+qrcode_id: &qrcode_id
+  <<: *qrcode
+  x: 135
+  y: 5.15
+  w: 9.85
+  h: 9.80
+  priority: 15
+
+box: &thebox
   <<: *box
   x: 10
   y: 5.1
   w: 135
-  h: 200
+  h: 65
   priority: 1
 
-location:
+location: &location
   <<: *1of3box
   <<: *line1
 
-watersname:
+location_p: &locationp
+  <<: *location
+  <<: *pictogram
+  text: 'files/world.png'
+
+watersname: &watersname
   <<: *2of3box
   <<: *line1
+
+watersname_p: &watersname_p
+  <<: *watersname
+  <<: *pictogram
+  text: "files/water.png"
 
 date: &date
   <<: *3of3box
@@ -240,181 +245,110 @@ date: &date
   format: "{0:%d.%m.%y %H:%M}"
   align: R
 
-date_p:
+date_p: &datep
   <<: *date
   <<: *pictogram
   text: "files/date.png"
 
-waterbox: &waterbox
-  <<: *4of6box
+name: &name
+  <<: *1of3box
+  <<: *w2of3box
   <<: *line2
 
-water: &water
-  <<: *waterbox
-  <<: *pictogram_in_box
 
-water_p:
-  <<: *water
-  <<: *pictogram
-  text: 'files/water.png'
+part2: &part2
+  offset_y: 67.5
+part2p: &part2p
+  offset_y: 69
 
-coordinatesbox: &coordinatesbox
-  <<: *1of6box
-  <<: *w3of6box
-  <<: *line2
+id2:
+  <<: *id
+  <<: *part2
+location2:
+  <<: *location
+  <<: *part2
 
-coordinates: &coordinates
-  <<: *coordinatesbox
-  <<: *pictogram_in_box
+location_p2:
+  <<: *locationp
+  <<: *part2p
 
-coordinates_p:
-  <<: *coordinates
-  <<: *pictogram
-  text: 'files/world.png'
+watersname2:
+  <<: *watersname
+  <<: *part2
 
-sight: &sight
-  <<: *5of6box
-  <<: *line3
-  align: R
-  
-sight_p:
-  <<: *sight
-  <<: *pictogram
-  text: "files/eye.png"
-
-divesuitbox: &divesuitbox
-  <<: *lbox
-  <<: *line3
-
-divesuit: &divesuit
-  <<: *divesuitbox
-  <<: *pictogram_in_box
-
-divesuit_p:
-  <<: *divesuit
-  <<: *pictogram
-  text: "files/suit.png"
-
-lead: &lead
-  <<: *4of6box
-  <<: *line3
-  align: R
-  
-lead_p:
-  <<: *lead
-  <<: *pictogram
-  text: "files/weight.png"
-
-pressure_start: &pressure_start
-  <<: *formbox
-  <<: *line2
-  <<: *6of6box
-  align: R
-
-pressure_start_p:
-  <<: *pressure_start
-  <<: *pictogram
-  text: 'files/gauge.png'
-
-pressure_end: &pressure_end
-  <<: *formbox
-  <<: *line3
-  <<: *6of6box
-  align: R
-
-pressure_end_p:
-  <<: *pressure_end
-  <<: *pictogram
-  text: 'files/gaugelow.png'
-
-tank: &tank
-  <<: *formbox
-  <<: *line2
-  <<: *5of6box
-  align: R
-
-tank_p:
-  <<: *tank
-  <<: *pictogram
-  text: 'files/tank.png'
-
-duration: &duration
-  <<: *llbox
-  <<: *line4
-  align: R
-
-duration_p:
-  <<: *duration
-  <<: *pictogram
-  text: 'files/time.png'
-
-watertemperature: &watertemperature
-  <<: *6of6box
-  <<: *line4
-  align: R
-
-watertemperature_p:
-  <<: *watertemperature
-  <<: *pictogram
-  text: 'files/tempwater.png'
-  align: R
-
-airtemperature: &airtemperature
-  <<: *5of6box
-  <<: *line4
-  align: R
-
-airtemperature_p:
-  <<: *airtemperature
-  <<: *pictogram
-  text: 'files/temp.png'
-
-maxdepth: &maxdepth
-  <<: *4of6box
-  <<: *line4
-  align: R
-maxdepth_p:
-  <<: *maxdepth
-  <<: *pictogram
-  text: 'files/depth.png'
-
-currentbox:
-  <<: *lrbox
-  <<: *line4
-
-current: &current
-  <<: *lrbox
-  <<: *line4
-  <<: *pictogram_in_box
-
-current_p:
-  <<: *current
-  <<: *pictogram
-  text: 'files/current.png'
-
-notes:
-  <<: *textbox
-  x: 12.5
-  <<: *line5
-  offset_y: 2.5
-  w: 130
-  h: 100
-  align: J
-  size: 12
-  text: ''
-  multiline: True
-
-graph:
-  type: image
-  x: 17.5
-  y: 143
-  w: 120
-  h: 47
-
-buddies:
-  <<: *textbox
-  y: 192
-  x: 10
-  w: 100
+watersname_p2: 
+  <<: *watersname_p
+  <<: *part2p
 
 
+date2:
+  <<: *date
+  <<: *part2
+
+date_p2:
+  <<: *datep
+  <<: *part2p
+
+name2:
+  <<: *name
+  <<: *part2
+
+
+title2: 
+  <<: *title
+  <<: *part2
+
+box2:
+  <<: *thebox
+  <<: *part2
+
+qrcode_id2:
+  <<: *qrcode_id
+  <<: *part2
+
+part3: &part3
+  offset_y: 135
+part3p: &part3p
+  offset_y: 136.5
+id3:
+  <<: *id
+  <<: *part3
+location3:
+  <<: *location
+  <<: *part3
+
+location_p3:
+  <<: *locationp
+  <<: *part3p
+
+watersname3:
+  <<: *watersname
+  <<: *part3
+
+watersname_p3: 
+  <<: *watersname_p
+  <<: *part3p
+
+date3:
+  <<: *date
+  <<: *part3
+
+date_p3:
+  <<: *datep
+  <<: *part3p
+
+name3:
+  <<: *name
+  <<: *part3
+
+title3: 
+  <<: *title
+  <<: *part3
+
+qrcode_id3:
+  <<: *qrcode_id
+  <<: *part3
+
+box3:
+  <<: *thebox
+  <<: *part3

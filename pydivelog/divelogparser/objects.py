@@ -54,12 +54,7 @@ class DiveDate(DivelogData):
 
 class DiveComputerData(DivelogData):
     def __str__(self):
-        extra = ''
-        for key, val in self._value.items():
-            if key != 'type':
-                extra += str(val)
-        extra = ' ({0})'.format(extra) if len(extra) else ''
-        return '{type}{extra}'.format(type=self['type'], extra=extra)
+        return str(self._value)
 
 class DivelogDataFactory():
 

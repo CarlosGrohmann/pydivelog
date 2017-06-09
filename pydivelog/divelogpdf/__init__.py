@@ -1,1 +1,1 @@
-from .pdf import DivelogPdf
+from .pdf import DivelogPdf, DivelogVerifyPdf

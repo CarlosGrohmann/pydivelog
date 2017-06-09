@@ -8,6 +8,9 @@ import yaml
 class DiveSample(object):
     def __init__(self, time):
         self.time = time
+        self.tankpressure = Pressure(None, None)
+        self.vendor = Vendordata(None, None)
+        self.decompression = Decompression(None, None, None)
 
 Pressure = namedtuple('Pressure', ['tank', 'value'])
 Vendordata = namedtuple('Vendordata', ['type', 'data'])
@@ -27,18 +30,6 @@ class Dive(object):
 
     def __getitem__(self, key):
         return self._samples[key]
-
-    def graph(self):
-        depth = ''
-        temp = ''
-        for s in sorted(self._samples, key=lambda x:int(x.time)):
-            depth += '({0}, {1}) '.format(float(s.time)/60.0, s.depth)
-            if hasattr(s, 'temp'):
-                temp += '({0}, {1}) '.format(float(s.time)/60.0, s.temp)
-
-        data = [depth, temp, '']
-        text = ''.join(map(lambda x: x[0]+x[1], zip(GRAPHSTATIC, data)))
-        return text
 
     @property
     def name(self):
@@ -60,23 +51,28 @@ class Dive(object):
         return text
 
     def yaml(self):
-        depth = []
-        temp = []
+        data = []
         mintemp = 9999
+        lasttemp = ''
         for s in sorted(self._samples, key=lambda x:int(x.time)):
-            depth.append({'time': float(s.time)/60.0, 'depth': float(s.depth)})
             if hasattr(s, 'temp'):
-                temp.append({ 'time': float(s.time)/60.0, 'temp': float(s.temp)})
                 mintemp = min(mintemp, float(s.temp))
+                lasttemp = float(s.temp)
+            data.append({
+                'time': float(s.time)/60.0,
+                'depth': float(s.depth),
+                'temp': lasttemp,
+                'vendor': dict(s.vendor._asdict()),
+                'pressure': dict(s.tankpressure._asdict()),
+                'deco': dict(s.decompression._asdict()),
+            })
 
         return {
             'duration': int(int(self.duration)/60),
             'maxdepth': self.depth,
             'fingerprint': self.fingerprint,
             'watertemperature': mintemp,
-            'data': {'temp': temp,
-             'depth': depth
-             },
+            'data': data,
         }
 
 

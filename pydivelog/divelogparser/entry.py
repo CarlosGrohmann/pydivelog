@@ -20,6 +20,7 @@ class Entry(DivelogFile):
         self.filename = filename
         self._setdate(filename)
         self._value['location'] = locations[self._value['location']]
+        self._value['coordinates'] = ', '.join(map(str, self._value['location']['coordinates']))
         self._value['water'] = self._value['location']['water']
         self._value['watersname'] = self._value['location']['watersname']
         cur_buddies = []
@@ -51,5 +52,4 @@ class Entry(DivelogFile):
     @property
     def verify(self):
         hstring = '{date}{location}'.format(**self._value)
-        print(hstring)
         return hashlib.sha1(hstring.encode('utf8')).hexdigest()[0:8]
