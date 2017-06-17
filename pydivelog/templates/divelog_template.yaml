@@ -41,157 +41,102 @@ templates:
     size: 10
     align: L
     text: ' '
-    h: 8
+    h: 7
+
+  pictogrambox: &pictogrambox
+    type: pictogramtext
+    margin: 1
+
+
   lbox: &lbox
     <<: *formbox
-    x: 10
-    w: 67.5
-  widelbox: &widelbox
-    <<: *formbox
-    x: 10
-    w: 101.25
-  smalllbox: &smalllbox
-    <<: *formbox
-    x: 10
-    w: 33.75
+    x: 15
+    w: 64
   llbox: &llbox
     <<: *formbox
-    x: 10
-    w: 33.75
+    x: 15
+    w: 32
   lrbox: &lrbox
     <<: *formbox
-    x: 43.75
-    w: 33.75
+    x: 47
+    w: 32
   rbox: &rbox
     <<: *formbox
-    x: 77.5
-    w: 67.5
-  widerbox: &widerbox
-    <<: *formbox
-    x: 111.25
-    w: 101.25
-  smallrbox: &smallrbox
-    <<: *formbox
-    x: 111.25
-    w: 33.75
+    x: 79
+    w: 64
   rlbox: &rlbox
     <<: *formbox
-    x: 77.5
-    w: 33.75
+    x: 79
+    w: 32
   rrbox: &rrbox
     <<: *formbox
-    x: 111.25
-    w: 33.75
+    x: 112
+    w: 32
 
   1of3box: &1of3box
     <<: *formbox
-    x: 10
-    w: 45
+    x: 15
+    w: 42.66
   2of3box: &2of3box
     <<: *formbox
-    x: 55
-    w: 45
+    x: 57.66
+    w: 42.66
   3of3box: &3of3box
     <<: *formbox
-    x: 100
-    w: 45
+    x: 100.33
+    w: 42.66
   w2of3box: &w2of3box
-    w: 90
+    w: 85.33
+
   1of6box: &1of6box
     <<: *formbox
-    x: 10
-    w: 22.5
+    x: 15
+    w: 21.33
   2of6box: &2of6box
     <<: *formbox
-    x: 32.5
-    w: 22.5
+    x: 36.33
+    w: 21.33
   3of6box: &3of6box
     <<: *formbox
-    x: 55.0
-    w: 22.5
+    x: 57.66
+    w: 21.33
   4of6box: &4of6box
     <<: *formbox
-    x: 77.5
-    w: 22.5
+    x: 79
+    w: 21.33
   5of6box: &5of6box
     <<: *formbox
-    x: 100
-    w: 22.5
+    x: 100.33
+    w: 21.33
   6of6box: &6of6box
     <<: *formbox
-    x: 122.5
-    w: 22.5
+    x: 121.66
+    w: 21.33
   w3of6box: &w3of6box
-    w: 67.5
-  1of9box: &1of9box
-    <<: *formbox
-    x: 10
-    w: 15
-  2of9box: &2of9box
-    <<: *formbox
-    x: 25
-    w: 15
-  3of9box: &3of9box
-    <<: *formbox
-    x: 40
-    w: 15
-  4of9box: &4of9box
-    <<: *formbox
-    x: 55
-    w: 15
-  5of9box: &5of9box
-    <<: *formbox
-    x: 70
-    w: 15
-  6of9box: &6of9box
-    <<: *formbox
-    x: 85
-    w: 15
-  7of9box: &7of9box
-    <<: *formbox
-    x: 100
-    w: 15
-  8of9box: &8of9box
-    <<: *formbox
-    x: 115
-    w: 15
-  9of9box: &9of9box
-    <<: *formbox
-    x: 130
-    w: 15
+    w: 64
 
-  pictogram: &pictogram
-    type: image
-    offset_x: 0.5
-    offset_y: 1.5
-    border: 0
-    w: 5 
-    h: 5 
-    
-  pictogram_in_box: &pictogram_in_box
-    offset_x: 5
-    border: 0
+
   line1: &line1
     y: 15
   line2: &line2
-    y: 23
+    y: 22
   line3: &line3
-    y: 31
+    y: 29
   line4: &line4
-    y: 39
+    y: 36
   line5: &line5
-    y: 47
+    y: 43
   line6: &line6
-    y: 55
+    y: 50
 
 qrcode_verify:
   <<: *qrcode
-  x: 129
+  x: 127.9
   y: 190
 
 qrcode_id:
   <<: *qrcode
-  x: 135
+  x: 133
   y: 5.15
   w: 9.85
   h: 9.80
@@ -199,7 +144,7 @@ qrcode_id:
 
 id:
   <<: *textbox
-  x: 10
+  x: 15
   y: 5.5
   w: 10
   h: 10
@@ -211,18 +156,18 @@ id:
 title:
   <<: *textbox
   <<: *whiteonblack
-  x: 20
+  x: 25
   y: 5.1
-  w: 115
+  w: 108
   h: 9.9
   align: C
   text: Divelog
 
 box:
   <<: *box
-  x: 10
+  x: 15
   y: 5.1
-  w: 135
+  w: 128
   h: 200
   priority: 1
 
@@ -239,165 +184,113 @@ date: &date
   <<: *line1
   format: "{0:%d.%m.%y %H:%M}"
   align: R
-
-date_p:
-  <<: *date
-  <<: *pictogram
-  text: "files/date.png"
-
-waterbox: &waterbox
-  <<: *4of6box
-  <<: *line2
+  <<: *pictogrambox
+  pictogram: 'files/date.png'
 
 water: &water
-  <<: *waterbox
-  <<: *pictogram_in_box
+  <<: *4of6box
+  <<: *line2
+  <<: *pictogrambox
+  pictogram: 'files/water.png'
 
-water_p:
-  <<: *water
-  <<: *pictogram
-  text: 'files/water.png'
-
-coordinatesbox: &coordinatesbox
+coordinates: &coordinates
   <<: *1of6box
   <<: *w3of6box
   <<: *line2
+  type: pictogramtext
+  pictogram: 'files/world.png'
+  margin: 1
 
-coordinates: &coordinates
-  <<: *coordinatesbox
-  <<: *pictogram_in_box
-
-coordinates_p:
-  <<: *coordinates
-  <<: *pictogram
-  text: 'files/world.png'
+# qrcode_coordinates:
+#   <<: *coordinates
+#   <<: *qrcode
+#   w: 7.85
+#   h: 7.80
+#   priority: 15
 
 sight: &sight
   <<: *5of6box
   <<: *line3
+  <<: *pictogrambox
+  pictogram: "files/eye.png"
   align: R
   
-sight_p:
-  <<: *sight
-  <<: *pictogram
-  text: "files/eye.png"
-
-divesuitbox: &divesuitbox
+divesuit: &divesuit
   <<: *lbox
   <<: *line3
-
-divesuit: &divesuit
-  <<: *divesuitbox
-  <<: *pictogram_in_box
-
-divesuit_p:
-  <<: *divesuit
-  <<: *pictogram
-  text: "files/suit.png"
+  <<: *pictogrambox
+  pictogram: "files/suit.png"
 
 lead: &lead
   <<: *4of6box
   <<: *line3
+  <<: *pictogrambox
   align: R
-  
-lead_p:
-  <<: *lead
-  <<: *pictogram
-  text: "files/weight.png"
+  pictogram: "files/weight.png"
 
 pressure_start: &pressure_start
-  <<: *formbox
   <<: *line2
   <<: *6of6box
   align: R
-
-pressure_start_p:
-  <<: *pressure_start
-  <<: *pictogram
-  text: 'files/gauge.png'
+  <<: *pictogrambox
+  pictogram: 'files/gauge.png'
 
 pressure_end: &pressure_end
-  <<: *formbox
   <<: *line3
   <<: *6of6box
   align: R
-
-pressure_end_p:
-  <<: *pressure_end
-  <<: *pictogram
-  text: 'files/gaugelow.png'
+  <<: *pictogrambox
+  pictogram: 'files/gaugelow.png'
 
 tank: &tank
-  <<: *formbox
   <<: *line2
   <<: *5of6box
   align: R
+  <<: *pictogrambox
+  pictogram: 'files/tank.png'
 
-tank_p:
-  <<: *tank
-  <<: *pictogram
-  text: 'files/tank.png'
 
 duration: &duration
   <<: *llbox
   <<: *line4
   align: R
+  <<: *pictogrambox
+  pictogram: 'files/time.png'
 
-duration_p:
-  <<: *duration
-  <<: *pictogram
-  text: 'files/time.png'
 
 watertemperature: &watertemperature
   <<: *6of6box
   <<: *line4
   align: R
-
-watertemperature_p:
-  <<: *watertemperature
-  <<: *pictogram
-  text: 'files/tempwater.png'
-  align: R
+  <<: *pictogrambox
+  pictogram: 'files/tempwater.png'
 
 airtemperature: &airtemperature
   <<: *5of6box
   <<: *line4
   align: R
-
-airtemperature_p:
-  <<: *airtemperature
-  <<: *pictogram
-  text: 'files/temp.png'
-
+  <<: *pictogrambox
+  pictogram: 'files/temp.png'
 maxdepth: &maxdepth
   <<: *4of6box
   <<: *line4
   align: R
-maxdepth_p:
-  <<: *maxdepth
-  <<: *pictogram
-  text: 'files/depth.png'
-
-currentbox:
-  <<: *lrbox
-  <<: *line4
+  <<: *pictogrambox
+  pictogram: 'files/depth.png'
 
 current: &current
   <<: *lrbox
   <<: *line4
-  <<: *pictogram_in_box
+  <<: *pictogrambox
+  pictogram: 'files/current.png'
 
-current_p:
-  <<: *current
-  <<: *pictogram
-  text: 'files/current.png'
 
 notes:
   <<: *textbox
-  x: 12.5
+  x: 17.5
   <<: *line5
   offset_y: 2.5
-  w: 130
+  w: 122
   h: 100
   align: J
   size: 12
@@ -414,7 +307,7 @@ graph:
 buddies:
   <<: *textbox
   y: 192
-  x: 10
+  x: 15
   w: 100
 
 

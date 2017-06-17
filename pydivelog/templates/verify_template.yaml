@@ -41,152 +41,97 @@ templates:
     size: 10
     align: L
     text: ' '
-    h: 8
+    h: 7
+
+  pictogrambox: &pictogrambox
+    type: pictogramtext
+    margin: 1
+
+
   lbox: &lbox
     <<: *formbox
-    x: 10
-    w: 67.5
-  widelbox: &widelbox
-    <<: *formbox
-    x: 10
-    w: 101.25
-  smalllbox: &smalllbox
-    <<: *formbox
-    x: 10
-    w: 33.75
+    x: 15
+    w: 64
   llbox: &llbox
     <<: *formbox
-    x: 10
-    w: 33.75
+    x: 15
+    w: 32
   lrbox: &lrbox
     <<: *formbox
-    x: 43.75
-    w: 33.75
+    x: 47
+    w: 32
   rbox: &rbox
     <<: *formbox
-    x: 77.5
-    w: 67.5
-  widerbox: &widerbox
-    <<: *formbox
-    x: 111.25
-    w: 101.25
-  smallrbox: &smallrbox
-    <<: *formbox
-    x: 111.25
-    w: 33.75
+    x: 79
+    w: 64
   rlbox: &rlbox
     <<: *formbox
-    x: 77.5
-    w: 33.75
+    x: 79
+    w: 32
   rrbox: &rrbox
     <<: *formbox
-    x: 111.25
-    w: 33.75
+    x: 112
+    w: 32
 
   1of3box: &1of3box
     <<: *formbox
-    x: 10
-    w: 45
+    x: 15
+    w: 42.66
   2of3box: &2of3box
     <<: *formbox
-    x: 55
-    w: 45
+    x: 57.66
+    w: 42.66
   3of3box: &3of3box
     <<: *formbox
-    x: 100
-    w: 45
+    x: 100.33
+    w: 42.66
   w2of3box: &w2of3box
-    w: 90
+    w: 85.33
+
   1of6box: &1of6box
     <<: *formbox
-    x: 10
-    w: 22.5
+    x: 15
+    w: 21.33
   2of6box: &2of6box
     <<: *formbox
-    x: 32.5
-    w: 22.5
+    x: 36.33
+    w: 21.33
   3of6box: &3of6box
     <<: *formbox
-    x: 55.0
-    w: 22.5
+    x: 57.66
+    w: 21.33
   4of6box: &4of6box
     <<: *formbox
-    x: 77.5
-    w: 22.5
+    x: 79
+    w: 21.33
   5of6box: &5of6box
     <<: *formbox
-    x: 100
-    w: 22.5
+    x: 100.33
+    w: 21.33
   6of6box: &6of6box
     <<: *formbox
-    x: 122.5
-    w: 22.5
+    x: 121.66
+    w: 21.33
   w3of6box: &w3of6box
-    w: 67.5
-  1of9box: &1of9box
-    <<: *formbox
-    x: 10
-    w: 15
-  2of9box: &2of9box
-    <<: *formbox
-    x: 25
-    w: 15
-  3of9box: &3of9box
-    <<: *formbox
-    x: 40
-    w: 15
-  4of9box: &4of9box
-    <<: *formbox
-    x: 55
-    w: 15
-  5of9box: &5of9box
-    <<: *formbox
-    x: 70
-    w: 15
-  6of9box: &6of9box
-    <<: *formbox
-    x: 85
-    w: 15
-  7of9box: &7of9box
-    <<: *formbox
-    x: 100
-    w: 15
-  8of9box: &8of9box
-    <<: *formbox
-    x: 115
-    w: 15
-  9of9box: &9of9box
-    <<: *formbox
-    x: 130
-    w: 15
+    w: 64
 
-  pictogram: &pictogram
-    type: image
-    offset_x: 0.5
-    offset_y: 1.5
-    border: 0
-    w: 5 
-    h: 5 
-    
-  pictogram_in_box: &pictogram_in_box
-    offset_x: 5
-    border: 0
+
   line1: &line1
     y: 15
   line2: &line2
-    y: 23
+    y: 22
   line3: &line3
-    y: 31
+    y: 29
   line4: &line4
-    y: 39
+    y: 36
   line5: &line5
-    y: 47
+    y: 43
   line6: &line6
-    y: 55
+    y: 50
 
 id: &id
   <<: *textbox
-  x: 10
+  x: 15
   y: 5.5
   w: 10
   h: 10
@@ -198,16 +143,16 @@ id: &id
 title: &title
   <<: *textbox
   <<: *whiteonblack
-  x: 20
+  x: 25
   y: 5.1
-  w: 115
+  w: 108
   h: 9.9
   align: C
   text: Divelog Sign for Matthias Bilger
 
 qrcode_id: &qrcode_id
   <<: *qrcode
-  x: 135
+  x: 133
   y: 5.15
   w: 9.85
   h: 9.80
@@ -215,40 +160,32 @@ qrcode_id: &qrcode_id
 
 box: &thebox
   <<: *box
-  x: 10
+  x: 15
   y: 5.1
-  w: 135
+  w: 128
   h: 65
   priority: 1
 
 location: &location
   <<: *1of3box
   <<: *line1
-
-location_p: &locationp
-  <<: *location
-  <<: *pictogram
-  text: 'files/world.png'
+  type: pictogramtext
+  pictogram: 'files/world.png'
+  margin: 1
 
 watersname: &watersname
   <<: *2of3box
   <<: *line1
-
-watersname_p: &watersname_p
-  <<: *watersname
-  <<: *pictogram
-  text: "files/water.png"
+  <<: *pictogrambox
+  pictogram: 'files/water.png'
 
 date: &date
   <<: *3of3box
   <<: *line1
   format: "{0:%d.%m.%y %H:%M}"
   align: R
-
-date_p: &datep
-  <<: *date
-  <<: *pictogram
-  text: "files/date.png"
+  <<: *pictogrambox
+  pictogram: 'files/date.png'
 
 name: &name
   <<: *1of3box
@@ -268,26 +205,16 @@ location2:
   <<: *location
   <<: *part2
 
-location_p2:
-  <<: *locationp
-  <<: *part2p
-
 watersname2:
   <<: *watersname
   <<: *part2
 
-watersname_p2: 
-  <<: *watersname_p
-  <<: *part2p
 
 
 date2:
   <<: *date
   <<: *part2
 
-date_p2:
-  <<: *datep
-  <<: *part2p
 
 name2:
   <<: *name
@@ -313,29 +240,20 @@ part3p: &part3p
 id3:
   <<: *id
   <<: *part3
+
 location3:
   <<: *location
   <<: *part3
 
-location_p3:
-  <<: *locationp
-  <<: *part3p
 
 watersname3:
   <<: *watersname
   <<: *part3
 
-watersname_p3: 
-  <<: *watersname_p
-  <<: *part3p
-
 date3:
   <<: *date
   <<: *part3
 
-date_p3:
-  <<: *datep
-  <<: *part3p
 
 name3:
   <<: *name

@@ -42,9 +42,8 @@ set samples 150
             f.write(setup)
         pass
 
-    def _create_graph(self, data):
-        fid = hashlib.sha1(str(data).encode('utf8')).hexdigest()
-        filename = os.path.join(self._temp, fid)
+    def _create_graph(self, fingerprint, data):
+        filename = os.path.join(self._temp, str(fingerprint))
         pngfile = '{}.png'.format(filename)
         if os.path.isfile(pngfile):
             return pngfile
@@ -82,8 +81,9 @@ plot file using 1:2 smooth csplines with filledcurve x1 title "" axes x1y1 lt rg
             pagedata['qrcode_id'] = self._create_qrcode(self._baseurl + str(id))
             if verify:
                 pagedata['qrcode_verify'] = self._create_qrcode(self._baseurl + str(id)+'/v/'+verify)
+        pagedata['qrcode_coordinates'] = self._create_qrcode('geo:{}'.format(pagedata['coordinates'].replace(' ','')))
         if 'data' in pagedata:
-            pagedata['graph'] = self._create_graph(pagedata['data'])
+            pagedata['graph'] = self._create_graph(pagedata['fingerprint'], pagedata['data'])
         self._template.add_page(**pagedata)
 
     def save(self, filename):

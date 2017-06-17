@@ -72,6 +72,17 @@ class Dive(object):
             'maxdepth': self.depth,
             'fingerprint': self.fingerprint,
             'watertemperature': mintemp,
+            'location':'',
+            'diveguide':'',
+            'airtemperature':'',
+            'divesuit':{ 'type':'', 'thickness':''},
+            'lead':'',
+            'pressure_start':'',
+            'pressure_end':'',
+            'tank':'',
+            'sight':'',
+            'buddies':'',
+            'notes':'',
             'data': data,
         }
 
@@ -97,7 +108,11 @@ def readdata(data):
             if float(s.depth) > 0.00:
                 s.temp = gv(sample,'temp')
                 s.tankpressure = Pressure(**sample.find('pressure').attrib)
-                s.vendor = Vendordata(**sample.find('vendor').attrib)
+                v = sample.find('vendor')
+                if 'data' in v.attrib:
+                    s.vendor = Vendordata(**v.attrib)
+                else:
+                    s.vendor = Vendordata(**v.attrib, data=v.text)
                 s.decompression = Decompression(**sample.find('deco').attrib)
             d.append(s)
         dives.append(d)

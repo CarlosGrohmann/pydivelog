@@ -4,6 +4,7 @@ import os
 import collections
 from . objects import PersonList, LocationList
 from . entry import Entry
+import logging
 
 
 class Files(object):
@@ -29,17 +30,25 @@ class Divelog(object):
     '''represent a complete divelog'''
 
     def __init__(self, basepath):
+        self.logger = logging.getLogger(__name__)
         self.basepath = os.path.expanduser(basepath)
+        self.logger.info('Using divelog at %s', self.basepath)
         self.files = Files(basepath)
         self.update()
 
     def update(self):
+
+        self.logger.debug('Reading locations at %s', self.files.locationfile)
         self.locations = LocationList(self.files.locationfile)
+        self.logger.debug('Reading person at %s', self.files.personfile)
         self.persons = PersonList(self.files.personfile)
         fileentries = {}
+        self.logger.debug('Reading dives')
         for filename in self.files.entries:
+            self.logger.debug('Dive %s', filename)
             entry = Entry(filename, self.locations, self.persons)
             fileentries[str(entry['date'])] = entry
+        self.logger.debug('Sorting dives')
         self.entries = collections.OrderedDict(sorted(fileentries.items()))
 
     def __iter__(self):

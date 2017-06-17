@@ -6,7 +6,7 @@ from . objects import DivelogFile, LocationList, PersonList, DivelogData
 
 
 class Entry(DivelogFile):
-    __slots__ = ['data', 'filename', 'date']
+    __slots__ = ['data', 'filename', 'date', '_value']
     dateregex = re.compile(
         '''(?P<year>[1-2][0-9]{3})-           # year
            (?P<month>(?:0[0-9])|(?:1[0-2]))-  # month
