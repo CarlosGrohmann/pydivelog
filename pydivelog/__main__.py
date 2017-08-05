@@ -9,7 +9,6 @@ from . divecmd_parser import readdata
 import yaml
 import logging
 
-
 def load_config():
     config = configparser.ConfigParser()
     defaults = os.path.join(os.path.dirname(os.path.realpath(__file__)),'..','config','divelog')
@@ -47,11 +46,19 @@ def action_pdf():
     url = config['output']['baseurl']
     logging.debug('Divelog for url: %s', url)
     f = DivelogPdf(baseurl=url, tempdir=os.path.expanduser(config['output']['tempdir']))
-    for i, e in enumerate(Divelog(os.path.expanduser(config['divelog']['path'])), 1):
-        logging.debug('Add Dive to pdf: %d - %s', i, e)
-        f.add_dive(i, verify=e.verify, **e.as_dict())
+    dlog = Divelog(os.path.expanduser(config['divelog']['path']))
+    for i, e in enumerate(dlog, 1):
+        if (args.startid is None or i >= args.startid) and \
+           (args.count is None or i < (args.startid + args.count)):
+            logging.debug('Add Dive to pdf: %d - %s', i, e)
+            f.add_dive(i, verify=e.verify, **e.as_dict())
+        else:
+            logging.debug('Skip Dive: %d - not in %d and %d', i, args.startid, args.startid + args.count)
 
-    name = os.path.join(os.path.expanduser(config['output']['dir']), config['output'].get('name', 'output.pdf'))
+    if not args.file:
+        name = os.path.join(os.path.expanduser(config['output']['dir']), config['output'].get('name', 'output.pdf'))
+    else:
+        name = args.file
     logging.info('Writing PDF output %s', name)
     f.save(name)
 

@@ -37,19 +37,20 @@ class Divelog(object):
         self.update()
 
     def update(self):
-
         self.logger.debug('Reading locations at %s', self.files.locationfile)
         self.locations = LocationList(self.files.locationfile)
         self.logger.debug('Reading person at %s', self.files.personfile)
         self.persons = PersonList(self.files.personfile)
         fileentries = {}
         self.logger.debug('Reading dives')
-        for filename in self.files.entries:
+        entries = list(self.files.entries)
+        for i, filename in enumerate(entries):
             self.logger.debug('Dive %s', filename)
             entry = Entry(filename, self.locations, self.persons)
             fileentries[str(entry['date'])] = entry
         self.logger.debug('Sorting dives')
         self.entries = collections.OrderedDict(sorted(fileentries.items()))
+
 
     def __iter__(self):
         return self.entries.values().__iter__()

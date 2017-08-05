@@ -11,3 +11,18 @@ divecmd = ~/proj/dive/divecmd/divecmd
 
 [divecmd]
 params = -a -d /dev/tty.usbserial-20030001 i450T
+
+
+[graph]
+setup = 
+    set encoding utf8
+    set term pngcairo size 1532,600 enhanced font 'Verdana'
+    set grid front
+    set xlabel "min"
+    set y2range [0 : 40]
+    set y2tics
+    set yrange [-40: 0]
+    set key bottom right
+    set ylabel "m" rotate by 0
+    set y2label "°C" rotate by 0
+    set samples 150

@@ -1,5 +1,8 @@
 import yaml
 
+class UnknownException(Exception):
+    pass
+
 class DivelogData(object):
 
     def __init__(self, value):
@@ -84,7 +87,7 @@ class DivelogFile(DivelogData):
 
     def __init__(self, filename):
         with open(filename, 'r') as f:
-            super().__init__(yaml.load(f.read()))
+            super().__init__(yaml.load(f.read(), Loader=yaml.CLoader))
 
 
 class ListFile(DivelogFile):
@@ -98,10 +101,13 @@ class ListFile(DivelogFile):
                        in elem for x in elem['alias']}
 
     def __getitem__(self, key):
-        if not isinstance(key, str):
-            key = str(key)
-        if not key in self._value:
-            key = self._alias[key]
+        try:
+            if not isinstance(key, str):
+                key = str(key)
+            if not key in self._value:
+                key = self._alias[key]
+        except KeyError:
+            raise UnknownException('"{}" not found as {}'.format(key, self.__class__.__name__.replace('List', '')))
         return self._value[key]
 
     def __len__(self):
